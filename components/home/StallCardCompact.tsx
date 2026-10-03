@@ -10,20 +10,20 @@ export function StallCardCompact({ stall }: { stall: Stall }) {
   const { state, dispatch } = useApp();
   const saved = state.saved.has(stall.id);
   return (
-    <div className="relative w-[250px] flex-none snap-start lg:w-full lg:flex-auto lg:snap-align-none">
+    <div className="relative w-[210px] flex-none snap-start lg:w-full lg:flex-auto lg:snap-align-none">
       <button
         type="button"
         onClick={() => dispatch({ type: 'SET_STALL', id: stall.id })}
         aria-label={`View ${stall.name}`}
-        className="block w-full overflow-hidden rounded-2xl bg-card text-left shadow-card"
+        className="block w-full overflow-hidden rounded-xl bg-card text-left surface-card lg:rounded-2xl"
       >
-        <Cover stall={stall} height={140} embedHeart={false} tag={stall.tags[0]} foot={<>From {rs(minP(stall))}</>} />
-        <div className="px-3 pb-3 pt-2.5">
-          <div className="flex items-center justify-between">
-            <b className="text-[15px] leading-tight">{stall.name}</b>
-            <span className="flex-none rounded-lg bg-green px-2 py-[1px] text-[13px] font-extrabold text-white">{stall.rating.toFixed(1)}</span>
+        <Cover stall={stall} height={120} embedHeart={false} tag={stall.tags[0]} foot={<>From {rs(minP(stall))}</>} />
+        <div className="px-2.5 pb-2.5 pt-2">
+          <div className="flex items-center justify-between gap-2">
+            <b className="truncate text-[14px] font-semibold leading-tight">{stall.name}</b>
+            <span className="flex-none rounded-md bg-green px-1.5 py-px text-[11px] font-bold text-white">{stall.rating.toFixed(1)}</span>
           </div>
-          <div className="mt-[3px] text-[12px] text-muted">{stall.area} · {fd(dist(state.area, stall))} · {stall.pct}% reorder</div>
+          <div className="mt-0.5 truncate text-[11px] text-muted">{stall.area} · {fd(dist(state.area, stall))}</div>
         </div>
       </button>
       <button
@@ -31,9 +31,9 @@ export function StallCardCompact({ stall }: { stall: Stall }) {
         onClick={() => dispatch({ type: 'TOGGLE_SAVE', id: stall.id })}
         aria-label={saved ? 'Remove from saved' : 'Save stall'}
         aria-pressed={saved}
-        className={`absolute right-2.5 top-2.5 z-[2] grid h-11 w-11 place-items-center rounded-full bg-card/95 shadow-card ${saved ? 'text-brand' : 'text-ink'}`}
+        className={`absolute right-2 top-2 z-[2] grid h-9 w-9 place-items-center rounded-full bg-card/95 shadow-card lg:right-2.5 lg:top-2.5 lg:h-11 lg:w-11 ${saved ? 'text-brand' : 'text-ink'}`}
       >
-        <Icon name="heart" size={18} className={saved ? 'fill-brand' : ''} />
+        <Icon name="heart" size={16} className={saved ? 'fill-brand' : ''} />
       </button>
     </div>
   );

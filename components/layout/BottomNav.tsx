@@ -13,7 +13,7 @@ export function BottomNav() {
         type="button"
         onClick={() => dispatch({ type: 'VENDOR_TAB', t })}
         aria-current={state.vtab2 === t ? 'page' : undefined}
-        className={`relative flex min-h-[52px] flex-1 flex-col items-center justify-center gap-[3px] py-2 text-[12px] font-semibold ${state.vtab2 === t ? 'text-brand' : 'text-muted'}`}
+        className={`relative flex min-h-[48px] flex-1 flex-col items-center justify-center gap-0.5 py-1.5 text-[11px] font-medium ${state.vtab2 === t ? 'text-brand' : 'text-muted'}`}
       >
         <Icon name={icon} />{label}
         {t === 'today' && newCount > 0 && (
@@ -22,7 +22,7 @@ export function BottomNav() {
       </button>
     );
     return (
-      <nav aria-label="Vendor navigation" className="absolute inset-x-0 bottom-0 z-20 flex items-end gap-1 rounded-t-[20px] bg-card px-1 pb-[calc(8px+env(safe-area-inset-bottom,0px))] pt-2 shadow-nav lg:hidden">
+      <nav aria-label="Vendor navigation" className="fixed inset-x-0 bottom-0 z-30 flex items-end gap-1 rounded-t-[20px] border-t border-line/80 bg-card/95 px-1 pb-[max(10px,env(safe-area-inset-bottom))] pt-2 shadow-nav backdrop-blur-md supports-[padding:max(0px)]:pb-[max(10px,env(safe-area-inset-bottom))] lg:hidden">
         <Item t="today" label="Orders" icon="bag" />
         <Item t="menu" label="Menu" icon="list" />
         <button type="button" onClick={() => dispatch({ type: 'VENDOR_OFF' })} aria-label="Exit vendor mode" className="flex min-h-[52px] flex-1 flex-col items-center justify-center gap-[3px] py-2 text-[12px] font-semibold text-muted">
@@ -38,7 +38,7 @@ export function BottomNav() {
       type="button"
       onClick={() => dispatch({ type: 'SET_TAB', tab: t })}
       aria-current={state.tab === t ? 'page' : undefined}
-      className={`relative flex min-h-[52px] flex-1 flex-col items-center justify-center gap-[3px] py-1.5 text-[12px] font-semibold ${state.tab === t ? 'text-brand' : 'text-muted'}`}
+      className={`relative flex min-h-[48px] flex-1 flex-col items-center justify-center gap-0.5 py-1 text-[11px] font-medium ${state.tab === t ? 'text-brand' : 'text-muted'}`}
     >
       <Icon name={icon} />{label}
       {t === 'orders' && activeOrders > 0 && (
@@ -47,11 +47,11 @@ export function BottomNav() {
     </button>
   );
   return (
-    <nav aria-label="Main navigation" className="absolute inset-x-0 bottom-0 z-20 flex items-end gap-1 rounded-t-[20px] bg-card px-1 pb-[calc(8px+env(safe-area-inset-bottom,0px))] pt-2 shadow-nav lg:hidden">
+    <nav aria-label="Main navigation" className="fixed inset-x-0 bottom-0 z-30 flex items-end gap-1 rounded-t-[20px] border-t border-line/80 bg-card/95 px-1 pb-[max(10px,env(safe-area-inset-bottom))] pt-2 shadow-nav backdrop-blur-md lg:hidden">
       <Item t="home" label="Home" icon="home" />
       <Item t="explore" label="Explore" icon="search" />
-      <button type="button" onClick={() => dispatch({ type: 'SET_TAB', tab: 'add' })} className="-mt-[26px] flex min-h-[52px] flex-1 flex-col items-center justify-center gap-[3px] py-1 text-[12px] font-semibold text-ink" aria-label="Add food">
-        <span className="grid h-[52px] w-[52px] place-items-center rounded-full bg-brand text-white shadow-[0_6px_16px_rgba(216,30,91,.45)]"><Icon name="plus" size={26} /></span>
+      <button type="button" onClick={() => dispatch({ type: 'SET_TAB', tab: 'add' })} className="-mt-[22px] flex min-h-[48px] flex-1 flex-col items-center justify-center gap-0.5 py-0.5 text-[11px] font-medium text-ink" aria-label="Add food">
+        <span className="grid h-[46px] w-[46px] place-items-center rounded-full bg-brand text-white shadow-[0_4px_12px_rgba(216,30,91,.35)]"><Icon name="plus" size={22} /></span>
         Add food
       </button>
       <Item t="orders" label="Orders" icon="bag" />

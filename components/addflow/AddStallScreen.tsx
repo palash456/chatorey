@@ -67,11 +67,12 @@ export function AddStallScreen() {
   const recent = allStalls(state.extraStalls).filter(s => s.addedBy).slice(-3).reverse();
   return (
     <DesktopPageShell aside={<AddAside points={state.points} />}>
-      <div className="pt-4 lg:hidden"><h1 className="text-[22px] font-extrabold" id="add-heading">Add a food spot</h1></div>
-      <div className="mt-3 rounded-[20px] p-[22px] text-white lg:mt-0" style={{ background: 'linear-gradient(120deg,#C2185B,#E8590C)' }}>
-        <MapPin size={36} className="opacity-95" strokeWidth={1.5} aria-hidden />
-        <h2 className="mt-1.5 text-[22px] font-extrabold leading-tight">Put a hidden stall on the map</h2>
-        <p className="mt-1 opacity-90">The best food in Jaipur is in lanes nobody has written about. Add one and earn Local Guide points.</p>
+      <div className="pt-3 lg:hidden"><h1 className="page-title font-display" id="add-heading">Add a spot</h1></div>
+      <div className="mt-2.5 rounded-2xl p-4 text-white lg:mt-0 lg:p-[22px]" style={{ background: 'linear-gradient(120deg,#C2185B,#E8590C)' }}>
+        <MapPin size={28} className="opacity-95 lg:hidden" strokeWidth={1.5} aria-hidden />
+        <MapPin size={36} className="hidden opacity-95 lg:block" strokeWidth={1.5} aria-hidden />
+        <h2 className="mt-1 text-[17px] font-semibold leading-tight lg:mt-1.5 lg:text-[22px] lg:font-extrabold">Put a hidden stall on the map</h2>
+        <p className="mt-1 text-[13px] opacity-90 lg:text-base">Add a lane favourite and earn Local Guide points.</p>
       </div>
       {hasDraft && (
         <div className="mt-3 rounded-2xl bg-card p-3.5 shadow-card">

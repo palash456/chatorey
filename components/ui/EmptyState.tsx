@@ -14,12 +14,12 @@ export function EmptyState({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="page-container page-narrow mt-7 rounded-2xl bg-card p-7 text-center shadow-card">
-      <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-soft text-brand">
-        <Icon size={28} strokeWidth={1.75} aria-hidden />
+    <div className="page-container page-narrow mt-5 rounded-xl bg-card p-5 text-center surface-card lg:mt-7 lg:rounded-2xl lg:p-7">
+      <div className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-soft text-brand lg:h-14 lg:w-14 lg:rounded-2xl">
+        <Icon size={26} strokeWidth={1.75} aria-hidden />
       </div>
-      <h3 className="mt-3 text-[18px] font-extrabold">{title}</h3>
-      {description && <p className="mb-3.5 mt-1.5 text-muted">{description}</p>}
+      <h3 className="mt-3 text-[16px] font-semibold lg:text-[18px] lg:font-extrabold">{title}</h3>
+      {description && <p className="mb-3 mt-1 text-[13px] text-muted lg:mb-3.5 lg:mt-1.5">{description}</p>}
       {children}
     </div>
   );

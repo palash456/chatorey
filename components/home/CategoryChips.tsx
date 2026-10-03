@@ -15,7 +15,7 @@ export function CategoryChips({ size = 66, active }: { size?: number; active?: s
             dispatch({ type: 'SET_QUERY', query: name });
             dispatch({ type: 'OPEN_EXPLORE_SEARCH' });
           }}
-          className={`flex flex-none flex-col items-center gap-1.5 text-[12.5px] font-semibold text-ink ${active === name ? 'opacity-100' : 'opacity-80'}`}
+          className={`flex flex-none flex-col items-center gap-1 text-[11px] font-medium text-ink lg:gap-1.5 lg:text-[12.5px] lg:font-semibold ${active === name ? 'opacity-100' : 'opacity-75'}`}
         >
           <span
             style={{ background: bg, width: size, height: size }}

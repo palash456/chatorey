@@ -40,8 +40,8 @@ export function CommunityScreen() {
           {CATS.map(c => <CatChip key={c} c={c} />)}
         </div>
         <div className="mx-auto space-y-3 pb-6 lg:max-w-3xl">
-          <div className="flex flex-col gap-3 rounded-2xl bg-card p-4 shadow-card sm:flex-row sm:items-center sm:justify-between">
-            <span className="text-[14px] text-muted">Ask, share a find, or plan a food walk in Jaipur</span>
+          <div className="flex flex-col gap-2 rounded-xl bg-card p-3 surface-card sm:flex-row sm:items-center sm:justify-between lg:rounded-2xl lg:gap-3 lg:p-4">
+            <span className="text-[13px] text-muted lg:text-[14px]">Share finds & plan food walks</span>
             <Button variant="primary" size="sm" className="flex-none" onClick={() => dispatch({ type: 'SET_SHEET', sheet: { t: 'compose' } })}>+ New post</Button>
           </div>
           {list.map(t => <ThreadCard key={t.id} t={t} />)}

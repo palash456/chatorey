@@ -24,16 +24,16 @@ export function ExploreStallFilters({ variant, searchRef, canCompare, term }: Pr
   return (
     <div className={isDesktop ? 'space-y-4' : ''}>
       {!isDesktop && (
-        <div className="flex items-center gap-2.5 rounded-2xl bg-soft px-3.5 text-muted">
-          <Icon name="search" size={20} />
+        <div className="flex items-center gap-2 rounded-xl bg-soft px-3 text-muted">
+          <Icon name="search" size={18} />
           <input
             ref={searchRef}
             value={state.query}
             onChange={e => dispatch({ type: 'SET_QUERY', query: e.target.value })}
             type="search"
-            placeholder="Search dishes, stalls, areas"
+            placeholder="Search stalls & dishes"
             autoComplete="off"
-            className="min-w-0 flex-1 bg-transparent py-3.5 outline-none"
+            className="min-w-0 flex-1 bg-transparent py-2.5 text-[14px] outline-none"
           />
         </div>
       )}
@@ -56,7 +56,7 @@ export function ExploreStallFilters({ variant, searchRef, canCompare, term }: Pr
 
       <div className={isDesktop ? 'space-y-2' : ''}>
         {isDesktop && <p className="text-[12px] font-bold uppercase tracking-wide text-muted">Filters</p>}
-        <div className={isDesktop ? 'flex flex-col gap-2' : 'flex gap-2 overflow-x-auto py-2.5 [scrollbar-width:none]'}>
+        <div className={isDesktop ? 'flex flex-col gap-2' : 'flex gap-1.5 overflow-x-auto py-2 [scrollbar-width:none]'}>
           {filterButtons.map(([k, label, on, fn]) => (
             <button
               type="button"
@@ -66,7 +66,7 @@ export function ExploreStallFilters({ variant, searchRef, canCompare, term }: Pr
               className={
                 isDesktop
                   ? `flex min-h-[44px] w-full items-center justify-between rounded-xl border px-3.5 py-2.5 text-left text-[13px] font-semibold ${on ? 'border-brand bg-brand-soft text-brand' : 'border-line bg-card'}`
-                  : `min-h-[44px] flex-none rounded-full border px-3.5 py-2 text-[13px] font-semibold ${on ? 'border-brand bg-brand-soft text-brand' : 'border-line bg-card'}`
+                  : `min-h-[36px] flex-none rounded-full border px-2.5 py-1.5 text-[12px] font-medium ${on ? 'border-brand bg-brand-soft text-brand' : 'border-line bg-card'}`
               }
             >
               {label}

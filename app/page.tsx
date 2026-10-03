@@ -18,7 +18,6 @@ import { Toast } from '../components/ui/Toast';
 import { StoryViewer } from '../components/stories/StoryViewer';
 import { ReelsViewer } from '../components/reels/ReelsViewer';
 import { rs, ST } from '../lib/helpers';
-import { DemoBanner, DemoWelcomeEffect } from '../components/demo/DemoChrome';
 import { ErrorBoundary } from '../components/ui/ErrorBoundary';
 
 function CartBar() {
@@ -31,8 +30,8 @@ function CartBar() {
     if (s) subtotal = Object.entries(state.cart.items).reduce((a, [k, q]) => a + s.items[+k].p * q, 0);
   }
   return (
-    <div className={`absolute left-3 z-[32] right-3 lg:left-auto lg:right-8 lg:max-w-md lg:w-full ${state.stallId ? 'bottom-[calc(14px+env(safe-area-inset-bottom,0px))] lg:bottom-6' : 'bottom-[84px] lg:bottom-6'}`}>
-      <button type="button" onClick={() => dispatch({ type: 'SET_SHEET', sheet: { t: 'cart' } })} aria-label={`View basket, ${count} items, ${rs(subtotal)}`} className="flex min-h-[52px] w-full items-center justify-between rounded-2xl bg-green px-4 py-3.5 font-extrabold text-white shadow-[0_8px_20px_rgba(0,0,0,.25)]">
+    <div className={`fixed left-3 z-[32] right-3 lg:absolute lg:left-auto lg:right-8 lg:max-w-md lg:w-full ${state.stallId ? 'bottom-[calc(14px+env(safe-area-inset-bottom,0px))] lg:bottom-6' : 'bottom-[calc(76px+env(safe-area-inset-bottom,0px))] lg:bottom-6'}`}>
+      <button type="button" onClick={() => dispatch({ type: 'SET_SHEET', sheet: { t: 'cart' } })} aria-label={`View basket, ${count} items, ${rs(subtotal)}`} className="flex min-h-[48px] w-full items-center justify-between rounded-xl bg-green px-3.5 py-3 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(0,0,0,.2)] lg:min-h-[52px] lg:rounded-2xl lg:px-4 lg:py-3.5 lg:text-base lg:font-extrabold">
         <span>{count} {count === 1 ? 'item' : 'items'} · {rs(subtotal)}</span>
         <span>View basket ›</span>
       </button>
@@ -60,11 +59,13 @@ function Shell() {
       <SideNav />
       <div id="app-stage">
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <DemoBanner />
-      <DemoWelcomeEffect />
       <ErrorBoundary>
-      <DesktopTopBar />
-      <main id="main-content" tabIndex={-1}><Screen /></main>
+      <div className="desktop-stage-column">
+      <main id="main-content" tabIndex={-1}>
+        <DesktopTopBar />
+        <div className="desktop-main-body"><Screen /></div>
+      </main>
+      </div>
       {state.stallId && !state.vendor && (
         <button
           type="button"

@@ -1,5 +1,20 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
+import { DM_Sans, Outfit } from 'next/font/google';
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+  weight: ['400', '500', '600', '700']
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+  weight: ['500', '600', '700', '800']
+});
 
 export const metadata: Metadata = {
   title: "Chatorey · Find what's actually worth eating",
@@ -19,7 +34,7 @@ const themeBoot = `(function(){try{var d=JSON.parse(localStorage.getItem('chator
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${dmSans.variable} ${outfit.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBoot }} />
       </head>

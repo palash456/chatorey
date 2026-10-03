@@ -71,7 +71,6 @@ export function ExploreScreen() {
         <ExploreSubNav />
         <div className="sticky top-0 z-[6] bg-bg pb-2 pt-1 lg:hidden"><SegMobile /></div>
         <p className="mb-4 hidden text-[14px] text-muted lg:block">Jaipur food clips — pick one to watch.</p>
-        <p className="mb-3 text-[13px] text-muted lg:hidden">Tap a reel to watch full screen.</p>
         <ReelsGrid />
       </DesktopCanvas>
     );
@@ -122,7 +121,7 @@ export function ExploreScreen() {
     </div>
   );
 
-  const results = !list.length ? (
+  const stallResults = (compact: boolean) => !list.length ? (
     <EmptyState icon={SearchX} title={`No stall for "${state.query}" yet`} description="If you know one, add it. You'll be the reason someone finds it.">
       <Button variant="primary" onClick={() => dispatch({ type: 'SET_TAB', tab: 'add' })}>Add this food spot</Button>
     </EmptyState>
@@ -145,12 +144,15 @@ export function ExploreScreen() {
     </div>
   ) : (
     <>
-      <p className="pb-2.5 pt-1 text-[13px] text-muted lg:pt-0">{list.length} {list.length === 1 ? 'stall' : 'stalls'}{term ? ` for ${term}` : ''} near {state.area}</p>
+      <p className="mobile-gutter-x pb-1.5 pt-0.5 text-[12px] text-muted lg:px-0 lg:pt-0">{list.length} {list.length === 1 ? 'stall' : 'stalls'}{term ? ` · ${term}` : ''}</p>
       <div className="stall-grid !px-0">
-        {list.map(s => <StallCardWide key={s.id} stall={s} />)}
+        {list.map(s => <StallCardWide key={s.id} stall={s} compact={compact} />)}
       </div>
     </>
   );
+
+  const resultsDesktop = stallResults(false);
+  const resultsMobile = stallResults(true);
 
   return (
     <DesktopCanvas className="lg:pt-2">
@@ -158,28 +160,25 @@ export function ExploreScreen() {
       <ExploreSubNav />
 
       <div className="sticky top-0 z-[6] bg-bg lg:hidden">
-        <div className="bg-bg pb-1 pt-1"><SegMobile /></div>
-        <div className="bg-card pt-2 shadow-card">
-          <div className="px-4">
-            <ExploreStallFilters variant="mobile" searchRef={searchRef} canCompare={canCompare} term={term} />
-          </div>
+        <div className="mobile-gutter-x bg-bg pb-1 pt-0.5"><SegMobile /></div>
+        <div className="border-b border-line bg-card mobile-gutter-x py-2">
+          <ExploreStallFilters variant="mobile" searchRef={searchRef} canCompare={canCompare} term={term} />
         </div>
       </div>
 
-      <div className="flex gap-1.5 overflow-x-auto px-4 pb-2 pt-3.5 [scrollbar-width:none] lg:hidden">
+      <div className="flex gap-1 overflow-x-auto mobile-gutter-x pb-1.5 pt-2 [scrollbar-width:none] lg:hidden">
         {FOODS.map(([name, iconKey, bg]) => {
           const active = qLower === name || qLower.startsWith(name);
           return (
-            <button key={name} onClick={() => dispatch({ type: 'SET_QUERY', query: name })} className={`flex flex-none flex-col items-center gap-1.5 text-[12.5px] font-semibold ${active ? 'opacity-100' : ''}`}>
-              <span style={{ background: bg, width: 56, height: 56 }} className={`grid place-items-center overflow-hidden rounded-full text-ink/80 ${active ? 'ring-2 ring-brand ring-offset-2' : ''}`}>
+            <button key={name} onClick={() => dispatch({ type: 'SET_QUERY', query: name })} aria-label={name} className={`flex-none rounded-full p-0.5 ${active ? 'ring-2 ring-brand ring-offset-2 ring-offset-bg' : ''}`}>
+              <span style={{ background: bg, width: 44, height: 44 }} className="grid place-items-center overflow-hidden rounded-full text-ink/80">
                 {CATEGORY_IMG[name] ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={CATEGORY_IMG[name]} alt="" className="h-full w-full object-cover" />
                 ) : (
-                  <FoodIcon food={iconKey} size={26} strokeWidth={1.75} />
+                  <FoodIcon food={iconKey} size={20} strokeWidth={1.75} />
                 )}
               </span>
-              {name[0].toUpperCase() + name.slice(1)}
             </button>
           );
         })}
@@ -195,10 +194,10 @@ export function ExploreScreen() {
             {foodPicker}
           </div>
         </aside>
-        <div className="min-w-0">{results}</div>
+        <div className="min-w-0">{resultsDesktop}</div>
       </div>
 
-      <div className="lg:hidden">{results}</div>
+      <div className="lg:hidden">{resultsMobile}</div>
     </DesktopCanvas>
   );
 }

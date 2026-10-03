@@ -17,7 +17,7 @@ export function DemoBanner() {
 
   return (
     <div className="relative z-[7] border-b border-amber/30 bg-amber-bg py-2.5 text-[12.5px] leading-snug text-ink">
-      <div className="relative px-5 lg:desktop-layout-width lg:px-8">
+      <div className="relative px-5 lg:px-0">
       <button
         type="button"
         aria-label="Dismiss prototype notice"

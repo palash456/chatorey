@@ -53,7 +53,7 @@ export function StallDetail({ id }: { id: string }) {
         <PhotoLightbox urls={lightbox.urls} index={lightbox.index} onClose={() => setLightbox(null)} onIndex={i => setLightbox({ urls: lightbox.urls, index: i })} />
       )}
       <div className="relative">
-        <Cover stall={s} height={230} />
+        <Cover stall={s} className="h-[200px] lg:h-[230px]" />
         <div className="absolute inset-x-3.5 top-3.5 z-[3] flex justify-between">
           <button onClick={() => dispatch({ type: 'SET_STALL', id: null })} aria-label="Back" className="grid h-[38px] w-[38px] place-items-center rounded-full bg-card shadow-card"><Icon name="back" /></button>
           <span className="flex gap-2">
@@ -69,16 +69,16 @@ export function StallDetail({ id }: { id: string }) {
       <div className="relative -mt-[22px] rounded-t-[22px] bg-bg">
         <div className="rounded-t-[22px] bg-card p-4">
           <div className="flex items-start justify-between">
-            <h1 className="text-[22px] font-extrabold leading-tight">{s.name}</h1>
-            <span className="flex-none rounded-lg bg-green px-2 py-[1px] text-[15px] font-extrabold text-white">{s.rating.toFixed(1)} ★</span>
+            <h1 className="text-[18px] font-semibold leading-tight lg:text-[22px] lg:font-extrabold">{s.name}</h1>
+            <span className="flex-none rounded-md bg-green px-1.5 py-px text-[13px] font-bold text-white lg:rounded-lg lg:px-2 lg:text-[15px] lg:font-extrabold">{s.rating.toFixed(1)}</span>
           </div>
-          <div className="mt-1 text-[13px] text-muted">{s.foods.map(f => f[0].toUpperCase() + f.slice(1)).join(' · ')}</div>
-          <div className="mt-2.5 flex flex-wrap gap-1.5">
-            {s.tags.map(t => <Pill key={t} tone="brand">{t}</Pill>)}
-            <Pill tone={s.open ? 'green' : 'amber'}>{s.open ? 'Open now' : 'Closed now'}</Pill>
-            <Pill>{s.hours}</Pill>
+          <div className="mt-1 text-[12px] text-muted lg:text-[13px]">{s.foods.slice(0, 4).map(f => f[0].toUpperCase() + f.slice(1)).join(' · ')}</div>
+          <div className="mt-2 flex flex-wrap gap-1 lg:mt-2.5 lg:gap-1.5">
+            {s.tags.slice(0, 2).map(t => <Pill key={t} tone="brand">{t}</Pill>)}
+            <Pill tone={s.open ? 'green' : 'amber'}>{s.open ? 'Open' : 'Closed'}</Pill>
+            <Pill className="hidden lg:inline-flex">{s.hours}</Pill>
           </div>
-          <div className="mt-2.5 text-[13px] text-muted">{s.area} · {fd(dist(state.area, s))} away · {s.n} reviews</div>
+          <div className="mt-2 text-[12px] text-muted lg:mt-2.5 lg:text-[13px]">{s.area} · {fd(dist(state.area, s))} · {s.n} reviews</div>
           <div className="mt-2.5 flex flex-wrap gap-2">
             <a href={mapsSearchUrl(s)} target="_blank" rel="noopener noreferrer" className="rounded-full border border-line px-3 py-1.5 text-[12.5px] font-bold text-ink">Directions</a>
             {tel && (
@@ -87,7 +87,7 @@ export function StallDetail({ id }: { id: string }) {
               </a>
             )}
           </div>
-          <div className="mt-2.5"><Pill tone="green" className="text-[12.5px]">{s.pct}% would order again</Pill></div>
+          <div className="mt-2 hidden lg:mt-2.5 lg:block"><Pill tone="green" className="text-[12.5px]">{s.pct}% would order again</Pill></div>
           {s.freeDeliveryPromo && <div className="mt-2"><Pill tone="brand">Free delivery on orders above ₹150</Pill></div>}
           {s.addedBy && <p className="mt-2 text-[12px] text-muted">Added to Chatorey by {s.addedBy}</p>}
           {!!s.extra?.length && <div className="mt-2.5 flex flex-wrap gap-1.5">{s.extra.map(x => <Pill key={x}>{x}</Pill>)}</div>}
@@ -105,11 +105,12 @@ export function StallDetail({ id }: { id: string }) {
           </div>
         )}
 
-        <div className="mx-4 mb-2.5 flex gap-2.5 rounded-2xl bg-amber-bg p-3.5">
-          <MessageSquareText size={22} className="flex-none text-amber" strokeWidth={1.75} aria-hidden />
-          <div><b>Local tip</b><div className="mt-0.5 text-[14.5px]">{s.tip}</div></div>
+        <div className="mx-4 mb-2.5 flex gap-2.5 rounded-xl bg-amber-bg p-3 lg:rounded-2xl lg:p-3.5">
+          <MessageSquareText size={20} className="flex-none text-amber lg:hidden" strokeWidth={1.75} aria-hidden />
+          <MessageSquareText size={22} className="hidden flex-none text-amber lg:block" strokeWidth={1.75} aria-hidden />
+          <div><b className="text-[13px] lg:text-base">Local tip</b><div className="mt-0.5 text-[13px] leading-snug lg:text-[14.5px]">{s.tip}</div></div>
         </div>
-        <div className="mx-4 mb-2.5 flex gap-2.5 rounded-2xl bg-card p-3.5 shadow-card">
+        <div className="mx-4 mb-2.5 hidden gap-2.5 rounded-2xl bg-card p-3.5 shadow-card lg:flex">
           <div className="grid h-[38px] w-[38px] flex-none place-items-center rounded-[10px] bg-brand-soft text-brand"><Bike size={20} aria-hidden /></div>
           <div><b>Delivered by {p.name}</b><div className="mt-0.5 text-[13.5px] text-muted">This stall doesn't deliver itself. Once your food is ready, a {p.name} rider picks it up. Est. {s.freeDeliveryPromo ? 'free delivery on ₹150+' : rs(q.fee)} · ~{q.eta} min ride.</div></div>
         </div>
@@ -125,8 +126,8 @@ export function StallDetail({ id }: { id: string }) {
         )}
 
         <div className="bg-card px-4 pb-6 pt-4">
-          <h2 className="text-[18px] font-extrabold">Menu</h2>
-          <p className="mt-1 text-[13px] text-muted">Tap ADD on a dish — your basket appears at the bottom when you’re ready.</p>
+          <h2 className="section-title font-display">Menu</h2>
+          <p className="mt-1 hidden text-[13px] text-muted lg:block">Tap ADD on a dish — your basket appears at the bottom when you’re ready.</p>
           {s.items.map((it, k) => {
             const qty = inCart ? (state.cart.items[k] || 0) : 0;
             const disabled = !s.orderable || !s.open || it.st === 'out';

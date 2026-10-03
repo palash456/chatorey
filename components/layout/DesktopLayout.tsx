@@ -40,10 +40,10 @@ export function DesktopSection({
 }) {
   return (
     <section className={`desktop-section ${className}`.trim()}>
-      <div className="desktop-section-head px-4 lg:px-0">
+      <div className="desktop-section-head mobile-gutter-x lg:px-0">
         <div className="min-w-0">
-          <h2 className="text-[19px] font-extrabold text-ink">{title}</h2>
-          {subtitle ? <p className="mt-0.5 text-[13px] text-muted">{subtitle}</p> : null}
+          <h2 className="section-title font-display">{title}</h2>
+          {subtitle ? <p className="section-sub">{subtitle}</p> : null}
         </div>
         {action}
       </div>
@@ -56,7 +56,7 @@ export function DesktopSection({
 export function StallRail({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
     <>
-      <div className={`stall-rail-scroll flex gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] lg:hidden ${className}`}>
+      <div className={`stall-rail-scroll flex gap-3 overflow-x-auto mobile-gutter-x pb-2 [scrollbar-width:none] lg:hidden ${className}`}>
         {children}
       </div>
       <div className={`stall-rail-grid hidden lg:grid ${className}`}>{children}</div>

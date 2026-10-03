@@ -4,12 +4,12 @@ import { FoodArt } from './FoodArt';
 import { Icon } from './Icon';
 
 export function Cover({
-  stall, height, heart, onHeart, saved, tag, foot, embedHeart = true
+  stall, height, heart, onHeart, saved, tag, foot, embedHeart = true, className = ''
 }: {
-  stall: Stall; height?: number; heart?: boolean; onHeart?: () => void; saved?: boolean; tag?: string; foot?: React.ReactNode; embedHeart?: boolean;
+  stall: Stall; height?: number; heart?: boolean; onHeart?: () => void; saved?: boolean; tag?: string; foot?: React.ReactNode; embedHeart?: boolean; className?: string;
 }) {
   return (
-    <div className="relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${stall.c[0]}, ${stall.c[1]})`, height }}>
+    <div className={`relative overflow-hidden ${className}`.trim()} style={{ background: `linear-gradient(135deg, ${stall.c[0]}, ${stall.c[1]})`, height }}>
       {stall.photos[0] ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={stall.photos[0]} alt={stall.name} className="absolute inset-0 h-full w-full object-cover" onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />

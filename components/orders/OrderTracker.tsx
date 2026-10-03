@@ -30,13 +30,14 @@ export function OrderTracker({ o }: { o: Order }) {
   const canCancel = o.mine && cur < 3;
 
   return (
-    <div className="mb-3.5 rounded-2xl bg-card p-4 shadow-card">
+    <div className="mb-3 rounded-xl bg-card p-3.5 surface-card lg:mb-3.5 lg:rounded-2xl lg:p-4">
       <div className="flex items-start justify-between gap-3">
-        <div><div className="text-[12px] text-muted">{o.id} · {s.name}</div><div className="mt-0.5 text-[18px] font-extrabold leading-tight">{STAGES[cur].t}</div></div>
-        {cur < 6 && <div className="rounded-xl bg-green-bg px-3 py-1.5 text-center font-extrabold leading-tight text-green"><b className="block text-[22px]">{min}</b><span className="text-[11px]">min</span></div>}
+        <div><div className="text-[11px] text-muted lg:text-[12px]">{s.name}</div><div className="mt-0.5 text-[16px] font-semibold leading-tight lg:text-[18px] lg:font-extrabold">{STAGES[cur].t}</div></div>
+        {cur < 6 && <div className="rounded-lg bg-green-bg px-2.5 py-1 text-center font-bold leading-tight text-green lg:rounded-xl lg:px-3 lg:py-1.5 lg:font-extrabold"><b className="block text-[18px] lg:text-[22px]">{min}</b><span className="text-[10px] lg:text-[11px]">min</span></div>}
       </div>
-      <div className="my-3.5 flex gap-1">{STAGES.map((_, i) => <i key={i} className={`h-1 flex-1 rounded-full ${i <= cur ? 'bg-green' : 'bg-line'}`} />)}</div>
-      <div className="mb-3.5 text-[13px] text-muted">{o.items.map((i, k) => <span key={k}>{i.q} × {i.n}{k < o.items.length - 1 ? ', ' : ''}</span>)} · <b className="text-ink">{rs(o.total)}</b></div>
+      <div className="my-2.5 flex gap-1 lg:my-3.5">{STAGES.map((_, i) => <i key={i} className={`h-1 flex-1 rounded-full ${i <= cur ? 'bg-green' : 'bg-line'}`} />)}</div>
+      <div className="mb-2.5 text-[12px] text-muted lg:mb-3.5 lg:text-[13px]">{o.items.map((i, k) => <span key={k}>{i.q}× {i.n}{k < o.items.length - 1 ? ', ' : ''}</span>)} · <b className="text-ink">{rs(o.total)}</b></div>
+      <div className="hidden lg:block">
       {STAGES.map((st, i) => {
         const done = i < cur || cur === 6, now = i === cur;
         return (
@@ -50,13 +51,15 @@ export function OrderTracker({ o }: { o: Order }) {
           </div>
         );
       })}
+      </div>
+      <p className="text-[12px] text-muted lg:hidden">{STAGES[cur].s}</p>
       {o.rider && cur >= 4 && cur < 6 && (
         <div className="mt-3.5 flex items-center justify-between rounded-xl bg-soft p-3">
           <div className="flex items-center gap-2.5"><span className="grid h-8 w-8 place-items-center rounded-full bg-accent text-accent-ink"><Bike size={18} aria-hidden /></span><div><b>{o.rider.n}</b><div className="text-[12px] text-muted">{o.partner.name} rider · {o.rider.v} · ★ {o.rider.r}</div></div></div>
           <Pill>OTP {o.otp}</Pill>
         </div>
       )}
-      <div className="mt-3.5 rounded-xl bg-soft p-3 text-[13px]"><b>Who does what:</b> The stall cooks and packs your food. {o.partner.name} picks it up and delivers it. Chatorey handles finding and ordering. For anything about the ride, contact {o.partner.name}.</div>
+      <div className="mt-3 hidden rounded-xl bg-soft p-3 text-[13px] lg:block"><b>Who does what:</b> The stall cooks and packs your food. {o.partner.name} picks it up and delivers it. Chatorey handles finding and ordering. For anything about the ride, contact {o.partner.name}.</div>
       {canCancel && (
         <Button block variant="default" size="sm" className="mt-3 text-red" onClick={() => dispatch({ type: 'CANCEL_ORDER', id: o.id })}>Cancel order</Button>
       )}

@@ -29,7 +29,7 @@ export function DesktopTopBar() {
       <div className="desktop-toolbar-inner">
       <div className="min-w-[200px] max-w-[280px] flex-none">
         <p className="text-[11px] font-bold uppercase tracking-wide text-muted">Jaipur</p>
-        <h2 className="truncate text-[18px] font-extrabold leading-tight text-ink">{meta.title}</h2>
+        <h2 className="truncate font-display text-[18px] font-extrabold leading-tight text-ink">{meta.title}</h2>
         {meta.subtitle ? <p className="truncate text-[12px] text-muted">{meta.subtitle}</p> : null}
       </div>
 

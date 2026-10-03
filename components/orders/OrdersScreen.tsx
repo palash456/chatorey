@@ -26,7 +26,7 @@ export function OrdersScreen() {
 
   return (
     <DesktopPageShell aside={aside}>
-      <div className="pt-4 lg:hidden"><h1 className="text-[22px] font-extrabold" id="orders-heading">Orders</h1></div>
+      <div className="pt-3 lg:hidden"><h1 className="page-title font-display" id="orders-heading">Orders</h1></div>
       <div className="h-3 lg:h-0" />
       <div>
         {active.length ? active.map(o => <OrderTracker key={o.id} o={o} />) : (
@@ -36,7 +36,7 @@ export function OrdersScreen() {
         )}
         {past.length > 0 && (
           <>
-            <div className="pb-2.5 pt-[22px]"><h2 className="text-[19px] font-extrabold">Past orders</h2></div>
+            <div className="pb-2 pt-4 lg:pb-2.5 lg:pt-[22px]"><h2 className="section-title font-display">Past orders</h2></div>
             {past.map(o => {
               const s = ST(o.sid, state.extraStalls, state.stallEdits);
               if (!s) return null;
