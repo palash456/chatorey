@@ -1,0 +1,12 @@
+{
+  "name": "Chatorey",
+  "short_name": "Chatorey",
+  "description": "Find what's actually worth eating in Jaipur",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3f3f6",
+  "theme_color": "#d81e5b",
+  "icons": [
+    { "src": "/images/icon.jpg", "sizes": "512x512", "type": "image/jpeg", "purpose": "any" }
+  ]
+}
