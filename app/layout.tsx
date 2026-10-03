@@ -1,20 +1,5 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans, Outfit } from 'next/font/google';
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  display: 'swap',
-  weight: ['400', '500', '600', '700']
-});
-
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-  weight: ['500', '600', '700', '800']
-});
 
 export const metadata: Metadata = {
   title: "Chatorey · Find what's actually worth eating",
@@ -32,10 +17,16 @@ export const viewport: Viewport = {
 
 const themeBoot = `(function(){try{var d=JSON.parse(localStorage.getItem('chatorey:v1')||'null');var t=d&&d.theme||'light';var dark=t==='dark'||(t==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`;
 
+const fontUrl =
+  'https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${outfit.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href={fontUrl} rel="stylesheet" />
         <script dangerouslySetInnerHTML={{ __html: themeBoot }} />
       </head>
       <body>{children}</body>

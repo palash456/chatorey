@@ -4,6 +4,8 @@
 
 :root {
   --page-gutter: 1rem;
+  --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Outfit', 'DM Sans', system-ui, sans-serif;
   --bg: 243 243 246;
   --card: 255 255 255;
   --ink: 27 27 34;
