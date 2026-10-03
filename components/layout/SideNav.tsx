@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { useIsLgUp } from '../../lib/useMediaQuery';
 import { Home, Search, Plus, ShoppingBag, User, LogOut, List, BarChart3, Star, Megaphone, Settings } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 
@@ -45,15 +46,16 @@ function NavItem({
 
 function VendorSideNav() {
   const { state, dispatch } = useApp();
+  const isLg = useIsLgUp();
   const newCount = state.orders.filter(o => o.sid === state.vsid && o.status === 0 && !o.cancelled).length;
 
   return (
-    <aside className="sidebar-shell hidden lg:flex">
+    <aside className="sidebar-shell hidden lg:flex" aria-hidden={!isLg}>
       <div className="border-b border-line px-5 py-5">
         <b className="text-[13px] font-bold uppercase tracking-wide text-muted">Vendor mode</b>
         <p className="mt-1 text-[18px] font-extrabold text-ink">Your stall</p>
       </div>
-      <nav aria-label="Vendor navigation" className="flex flex-1 flex-col gap-0.5 p-3">
+      <nav aria-label="Vendor (sidebar)" className="flex flex-1 flex-col gap-0.5 p-3">
         {VTABS.map(([t, label, icon]) => (
           <NavItem
             key={t}
@@ -80,12 +82,13 @@ function VendorSideNav() {
 
 export function SideNav() {
   const { state, dispatch } = useApp();
+  const isLg = useIsLgUp();
   if (state.vendor) return <VendorSideNav />;
 
   const activeOrders = state.orders.filter(o => o.mine && o.status < 6 && !o.cancelled).length;
 
   return (
-    <aside className="sidebar-shell hidden lg:flex">
+    <aside className="sidebar-shell hidden lg:flex" aria-hidden={!isLg}>
       <div className="flex items-center gap-3 border-b border-line px-5 py-5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/icon.jpg" alt="" className="h-10 w-10 rounded-xl shadow-card" />
@@ -94,7 +97,7 @@ export function SideNav() {
           <span className="block truncate text-[12px] text-muted">Jaipur food map</span>
         </div>
       </div>
-      <nav aria-label="Main navigation" className="flex flex-1 flex-col gap-0.5 p-3">
+      <nav aria-label="Main (sidebar)" className="flex flex-1 flex-col gap-0.5 p-3">
         <NavItem active={state.tab === 'home'} onClick={() => dispatch({ type: 'SET_TAB', tab: 'home' })} icon={<Home size={20} strokeWidth={1.75} />} label="Home" />
         <NavItem active={state.tab === 'explore'} onClick={() => dispatch({ type: 'SET_TAB', tab: 'explore' })} icon={<Search size={20} strokeWidth={1.75} />} label="Explore" />
         <NavItem active={state.tab === 'add'} onClick={() => dispatch({ type: 'SET_TAB', tab: 'add' })} icon={<Plus size={20} strokeWidth={1.75} />} label="Add food spot" />

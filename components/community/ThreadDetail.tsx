@@ -14,7 +14,7 @@ function CommentRow({ c, tid, depth = 0 }: { c: Comment; tid: string; depth?: nu
   const { state, dispatch } = useApp();
   return (
     <div className={`flex gap-2.5 ${depth ? 'ml-[42px] mt-2.5' : 'mt-3'}`}>
-      <Avatar uid={c.u} size={32} />
+      <Avatar uid={c.u} size={32} decorative />
       <div className="min-w-0 flex-1">
         <div className="flex justify-between"><b className="text-[13px]">{USERS[c.u]?.n || c.u}</b><span className="text-[12px] text-muted">{timeAgo(c.age)} ago</span></div>
         <p className="mt-0.5 text-[13px]">{c.t}</p>
@@ -43,7 +43,7 @@ export function ThreadDetail({ id }: { id: string }) {
         <b className="text-[15px]">{t.cat}</b>
       </div>
       <div className="pb-4 pt-2">
-        <div className="mt-1 flex items-center gap-2"><Avatar uid={t.uid} size={32} /><div><b className="text-[13px]">{u.n}</b><div className="text-[12px] text-muted">{u.bd} · {timeAgo(t.age)} ago</div></div></div>
+        <div className="mt-1 flex items-center gap-2"><Avatar uid={t.uid} size={32} decorative /><div><b className="text-[13px]">{u.n}</b><div className="text-[12px] text-muted">{u.bd} · {timeAgo(t.age)} ago</div></div></div>
         <h2 className="mt-3 text-[22px] font-extrabold leading-tight">{t.title}</h2>
         {t.img && (
           // eslint-disable-next-line @next/next/no-img-element

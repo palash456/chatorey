@@ -1,10 +1,12 @@
 'use client';
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import { useIsLgUp } from '../../lib/useMediaQuery';
 import { Icon } from '../ui/Icon';
 
 export function BottomNav() {
   const { state, dispatch } = useApp();
+  const isLg = useIsLgUp();
 
   if (state.vendor) {
     const newCount = state.orders.filter(o => o.sid === state.vsid && o.status === 0 && !o.cancelled).length;
@@ -22,7 +24,7 @@ export function BottomNav() {
       </button>
     );
     return (
-      <nav aria-label="Vendor navigation" className="fixed inset-x-0 bottom-0 z-30 flex items-end gap-1 rounded-t-[20px] border-t border-line/80 bg-card/95 px-1 pb-[max(10px,env(safe-area-inset-bottom))] pt-2 shadow-nav backdrop-blur-md supports-[padding:max(0px)]:pb-[max(10px,env(safe-area-inset-bottom))] lg:hidden">
+      <nav aria-label="Vendor (mobile tabs)" aria-hidden={isLg} className="fixed inset-x-0 bottom-0 z-30 flex items-end gap-1 rounded-t-[20px] border-t border-line/80 bg-card/95 px-1 pb-[max(10px,env(safe-area-inset-bottom))] pt-2 shadow-nav backdrop-blur-md supports-[padding:max(0px)]:pb-[max(10px,env(safe-area-inset-bottom))] lg:hidden">
         <Item t="today" label="Orders" icon="bag" />
         <Item t="menu" label="Menu" icon="list" />
         <button type="button" onClick={() => dispatch({ type: 'VENDOR_OFF' })} aria-label="Exit vendor mode" className="flex min-h-[52px] flex-1 flex-col items-center justify-center gap-[3px] py-2 text-[12px] font-semibold text-muted">
@@ -47,7 +49,7 @@ export function BottomNav() {
     </button>
   );
   return (
-    <nav aria-label="Main navigation" className="fixed inset-x-0 bottom-0 z-30 flex items-end gap-1 rounded-t-[20px] border-t border-line/80 bg-card/95 px-1 pb-[max(10px,env(safe-area-inset-bottom))] pt-2 shadow-nav backdrop-blur-md lg:hidden">
+    <nav aria-label="Main (mobile tabs)" aria-hidden={isLg} className="fixed inset-x-0 bottom-0 z-30 flex items-end gap-1 rounded-t-[20px] border-t border-line/80 bg-card/95 px-1 pb-[max(10px,env(safe-area-inset-bottom))] pt-2 shadow-nav backdrop-blur-md lg:hidden">
       <Item t="home" label="Home" icon="home" />
       <Item t="explore" label="Explore" icon="search" />
       <button type="button" onClick={() => dispatch({ type: 'SET_TAB', tab: 'add' })} className="-mt-[22px] flex min-h-[48px] flex-1 flex-col items-center justify-center gap-0.5 py-0.5 text-[11px] font-medium text-ink" aria-label="Add food">

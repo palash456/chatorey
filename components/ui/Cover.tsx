@@ -12,7 +12,7 @@ export function Cover({
     <div className={`relative overflow-hidden ${className}`.trim()} style={{ background: `linear-gradient(135deg, ${stall.c[0]}, ${stall.c[1]})`, height }}>
       {stall.photos[0] ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={stall.photos[0]} alt={stall.name} className="absolute inset-0 h-full w-full object-cover" onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+        <img src={stall.photos[0]} alt="" className="absolute inset-0 h-full w-full object-cover" onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
       ) : (
         <div className="flex h-full w-full items-center justify-center">
           <div className="h-[70%] w-[70%]"><FoodArt stall={stall} /></div>

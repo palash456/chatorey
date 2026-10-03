@@ -97,7 +97,7 @@ export function ExploreScreen() {
     if (so === 'rating') return b.rating - a.rating;
     return score(b) - score(a);
   });
-  const canCompare = term && list.length >= 2;
+  const canCompare = Boolean(term && list.length >= 2);
   const qLower = state.query.trim().toLowerCase();
 
   const foodPicker = (

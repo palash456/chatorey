@@ -68,7 +68,7 @@ export function StoryViewer() {
         ))}
       </div>
       <div className="relative z-[2] flex shrink-0 items-center gap-2.5 px-3.5 py-2.5 pr-14 text-white">
-        <Avatar uid={g.uid} size={32} />
+        <Avatar uid={g.uid} size={32} decorative />
         <div><b>{u.n}</b><div className="text-[12px] opacity-75">{sl.when} ago</div></div>
       </div>
       <div className="relative z-[1] min-h-0 flex-1 overflow-hidden bg-black">

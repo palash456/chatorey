@@ -33,7 +33,7 @@ export function ThreadCard({ t }: { t: Thread }) {
           )}
           <div className="mt-1 text-[13px] leading-snug text-muted lg:text-[14px]">{cut(t.body, 100)}</div>
           <div className="mt-2.5 flex items-center gap-1.5">
-            <Avatar uid={t.uid} size={22} /><b className="text-[12px]">{u.n}</b>
+            <Avatar uid={t.uid} size={22} decorative /><b className="text-[12px]">{u.n}</b>
             <Pill className="text-[10.5px]">{u.bd}</Pill>
           </div>
           {sid && <div className="mt-2"><Pill tone="brand" className="inline-flex items-center gap-1"><MapPin size={12} aria-hidden /> {sid.name}</Pill></div>}

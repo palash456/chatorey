@@ -204,7 +204,7 @@ export function StallDetail({ id }: { id: string }) {
             return (
               <div key={i} className="border-t border-line py-3.5 first:border-t-0">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2"><Avatar uid={r.who.toLowerCase()} size={32} /><div><b className="text-[14px]">{r.who}</b><div className="text-[12px] text-muted">{r.lvl} · {r.when}{r.stars ? ` · ${'★'.repeat(r.stars)}` : ''}</div></div></div>
+                  <div className="flex items-center gap-2"><Avatar uid={r.who.toLowerCase()} size={32} decorative /><div><b className="text-[14px]">{r.who}</b><div className="text-[12px] text-muted">{r.lvl} · {r.when}{r.stars ? ` · ${'★'.repeat(r.stars)}` : ''}</div></div></div>
                   <Pill>{r.food}</Pill>
                 </div>
                 <div className="mt-2.5 flex items-start gap-3">

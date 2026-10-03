@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Icon } from '../ui/Icon';
 import { CategoryChips } from './CategoryChips';
@@ -10,11 +10,10 @@ import { Button } from '../ui/Button';
 import { DesktopCanvas, DesktopSection, StallRail } from '../layout/DesktopLayout';
 import { score, dist, allStalls } from '../../lib/helpers';
 
-function rightNowLabel() {
-  const h = new Date().getHours();
-  if (h < 11) return { label: 'Morning picks', foods: ['kachori', 'jalebi', 'chai'] };
-  if (h < 16) return { label: 'Afternoon picks', foods: ['lassi', 'dal baati', 'chaat', 'ghewar'] };
-  if (h < 20) return { label: 'Evening picks', foods: ['golgappe', 'chaat', 'momos', 'mirchi bada', 'samosa'] };
+function rightNowLabel(hour: number) {
+  if (hour < 11) return { label: 'Morning picks', foods: ['kachori', 'jalebi', 'chai'] };
+  if (hour < 16) return { label: 'Afternoon picks', foods: ['lassi', 'dal baati', 'chaat', 'ghewar'] };
+  if (hour < 20) return { label: 'Evening picks', foods: ['golgappe', 'chaat', 'momos', 'mirchi bada', 'samosa'] };
   return { label: 'Late-night picks', foods: ['kulfi', 'momos', 'jalebi'] };
 }
 
@@ -32,9 +31,11 @@ function SectionHeading({ title, subtitle, action }: { title: string; subtitle?:
 
 export function HomeScreen() {
   const { state, dispatch } = useApp();
+  const [hour, setHour] = useState(12);
+  useEffect(() => setHour(new Date().getHours()), []);
   const catalog = allStalls(state.extraStalls);
   const top = [...catalog].sort((a, b) => score(b) - score(a)).slice(0, 6);
-  const rn = rightNowLabel();
+  const rn = rightNowLabel(hour);
   const near = catalog.filter(s => s.open && s.foods.some(f => rn.foods.includes(f))).sort((a, b) => score(b) - score(a)).slice(0, 6);
   const gems = catalog.filter(s => s.tags.includes('Hidden gem')).slice(0, 6);
   const cafes = catalog.filter(s => s.tags.includes('Cafe')).sort((a, b) => score(b) - score(a)).slice(0, 6);
@@ -75,8 +76,7 @@ export function HomeScreen() {
           </button>
         </div>
 
-        <div className="lg:hidden"><StoryBar /></div>
-        <div className="mt-6 hidden lg:block desktop-panel overflow-hidden p-5">
+        <div className="lg:mt-6 lg:desktop-panel lg:overflow-hidden lg:p-5">
           <StoryBar />
         </div>
       </header>

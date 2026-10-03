@@ -47,7 +47,7 @@ export function ReelsViewer() {
         <div className="overflow-y-auto px-4">
           {comments.length ? comments.map((c, i) => (
             <div key={i} className="mt-3 flex gap-2.5">
-              <Avatar uid={c.u} size={32} />
+              <Avatar uid={c.u} size={32} decorative />
               <div>
                 <b className="text-[13px]">{USERS[c.u]?.n}</b> <span className="text-[12px] text-muted">{c.when}</span>
                 <p className="text-[13px]">{c.t}</p>
@@ -57,7 +57,7 @@ export function ReelsViewer() {
           )) : <p className="px-0 py-4 text-[13px] text-muted">No comments yet.</p>}
         </div>
         <div className="flex items-center gap-2.5 border-t border-line px-4 py-2.5">
-          <Avatar uid="aarav" size={32} />
+          <Avatar uid="aarav" size={32} decorative />
           <label htmlFor="rcdraft" className="sr-only">Add a comment</label>
           <input id="rcdraft" defaultValue="" placeholder="Add a comment" className="min-h-[44px] flex-1 rounded-full bg-soft px-3.5 py-2.5 text-ink outline-none placeholder:text-muted" />
           <button
@@ -94,7 +94,7 @@ export function ReelsViewer() {
 
       <div className="absolute inset-x-0 bottom-0 z-[2] px-4 pb-[26px] pr-[70px] pt-[18px] text-white">
         <div className="flex items-center gap-2 font-extrabold">
-          <Avatar uid={r.u} size={28} /> {USERS[r.u]?.n}
+          <Avatar uid={r.u} size={28} decorative /> {USERS[r.u]?.n}
           <button type="button" onClick={() => dispatch({ type: 'SET_STALL', id: r.sid })} className="ml-1.5 min-h-[36px] rounded-full bg-white/20 px-2.5 py-1 text-[12px]">View stall</button>
         </div>
         <p className="mt-2 text-[14px] leading-snug">{r.cap.replace(/[\u{1F300}-\u{1F9FF}]/gu, '').trim()}</p>
